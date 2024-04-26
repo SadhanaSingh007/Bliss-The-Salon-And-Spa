@@ -59,7 +59,7 @@ const Services = () => {
               <h3 className="service-title">{service.title}</h3>
               <div className="service-content">
                 <p className="service-description">{service.description}</p>
-                <p>--------------------</p>
+                <p className="dash-p">-----------------</p>
                 <p className="service-duration">{service.duration}</p>
                 <p className="service-price">${service.price}</p>
               </div>
