@@ -8,6 +8,7 @@ import Products from "./components/products";
 import Cart from "./components/cart/Cart";
 import { CartProvider } from "./context/Cart";
 import { ServiceProvider } from "./context/serviceContext";
+import Contact from "./components/contact/Contact";
 import Appointment from "./components/services/appointments/Appointments";
 
 function App() {
@@ -23,8 +24,13 @@ function App() {
             <Route path="/book-appointment" element={<Appointment />} />
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
+<<<<<<< HEAD
             <Route path="/register" element={<Register />} />
 
+=======
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/register" element={<Register />} />
+>>>>>>> main
           </Routes>
         </ServiceProvider>
       </CartProvider>
