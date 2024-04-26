@@ -24,13 +24,8 @@ function App() {
             <Route path="/book-appointment" element={<Appointment />} />
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
-<<<<<<< HEAD
-            <Route path="/register" element={<Register />} />
-
-=======
             <Route path="/contact" element={<Contact />} />
             <Route path="/register" element={<Register />} />
->>>>>>> main
           </Routes>
         </ServiceProvider>
       </CartProvider>
