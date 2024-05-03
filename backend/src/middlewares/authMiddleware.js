@@ -1,11 +1,14 @@
-
 import jwt from 'jsonwebtoken';
-import {User}from '../models/User.js';
+import { User } from '../models/User.js';
 
 const authMiddleware = async (req, res, next) => {
   try {
-    // Get the token from the request header
-    const token = req.headers.authorization.split(" ")[1]
+    // Extract the token from the request header
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      throw new Error('Authorization header missing or invalid');
+    }
+    const token = authHeader.split(' ')[1];
 
     // Verify the token
     const decoded = jwt.verify(token, process.env.SECRET);
@@ -15,14 +18,17 @@ const authMiddleware = async (req, res, next) => {
 
     // If no user is found, throw an error
     if (!user) {
-      throw new Error();
+      throw new Error('User not found');
     }
 
-
+    // Attach token and user information to the request
     req.token = token;
     req.user = user;
-    next(); 
+
+    // Call the next middleware function
+    next();
   } catch (error) {
+    console.error('Authentication error:', error.message);
     res.status(401).json({ error: 'Please authenticate' });
   }
 };

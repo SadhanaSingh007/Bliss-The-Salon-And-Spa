@@ -1,64 +1,146 @@
 import React, { useEffect, useState } from "react";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { TiDeleteOutline } from "react-icons/ti";
 import Calendar from "react-calendar";
 import "./Appointments.scss";
-import { useServiceContext } from "../../../context/serviceContext.tsx";
+import { useUser } from "../../../context/UserContext.tsx";
+import { useServiceContext } from "../../../context/serviceContext.tsx"; 
 
 const Appointment = () => {
   const { services, fetchServices } = useServiceContext();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedService, setSelectedService] = useState<string>("");
-  const [selectedTime, setSelectedTime] = useState<string>("");
-  const [submittedData, setSubmittedData] = useState<any>(null);
+  const [selectedTime, setSelectedTime] = useState<number>(0);
+  const [summary, setSummary] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [filteredTimes, setFilteredTimes] = useState<any[]>([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
+
+
+  const { user, setUser, token, setToken } = useUser();
+  const displayTime = parseInt(selectedTime)
+  const actualTime =  displayTime+ 2;
+
+  const time = new Date(selectedDate?.setHours(actualTime)); 
+  
   useEffect(() => {
     fetchServices();
   }, []);
 
-  const handleDateSelect = (date: Date | Date[]) => {
-    setSelectedDate(date instanceof Date ? date : null);
-    // console.log(e.target);
+  // const handleDateSelect = (date: Date | Date[]) => {
+  //   setSelectedDate(date instanceof Date ? date : null);
+  // };
+  
+  const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedHour = parseInt(event.target.value);
+    setSelectedTime(selectedHour);
   };
-  // const handleDate = (e)=>{
-  //   console.log(e.target);
-  // }
 
   const handleServiceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedService(event.target.value);
   };
 
-  const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTime(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (selectedDate && selectedService && selectedTime) {
-      // Find the selected service object
-      const selectedServiceObj = services.find(service => service.title === selectedService);
-      if (selectedServiceObj) {
-        // Extract the price from the selected service object
-        const price = selectedServiceObj.price;
-        // Calculate the total by parsing the price to a number
-        const total = parseFloat(price) || 0;
-        // Update the submitted data state
-        setSubmittedData({
-          date: selectedDate,
-          service: selectedService,
-          time: selectedTime,
-          price: price,
-          total: total
-        });
+    try {
+      
+      if (!selectedDate || !selectedService || !selectedTime) {
+        console.error("Please select date, service, and time");
+        return;
       }
-      setSelectedDate(null);
+      
+      const selectedServiceObj = services.find(
+        (service) => service.title === selectedService
+      );
+      console.log("this is selectedServiceObj",selectedServiceObj);
+      console.log("this is selected service", selectedService);
+      if (!selectedServiceObj) {
+        console.error("Selected service not found");
+        return;
+      }
+      
+      const {price}= selectedServiceObj
+      console.log(typeof(price));
+      
+      const submittedData = {
+        service: selectedService,
+        startTime: time,
+        price:price,
+        user: user._id
+      };
+      
+      const config = {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submittedData),
+      };
+      
+      const response = await fetch("http://localhost:3020/appointments/book" , config);
+  
+      if (response.status === 400) {
+        const responseData = await response.json();
+        setErrorMessage(responseData.message);
+        setFilteredTimes(responseData.filteredTimes); 
+        setShowPopup(true); 
+        return;
+      }
+      const result = await response.json();
+      console.log("Appointment booked successfully:", result);
       setSelectedService("");
-      setSelectedTime("");
-    } else {
-      console.error("Please select date, service, and time");
+      setSelectedTime(0);
+      fetchData();
+    } catch (error) {
+      console.error("Error while booking appointment:", error);
     }
   };
   
-  return (
-    <>
+  const fetchData = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    };
+    try {
+      const response = await fetch(`http://localhost:3020/appointments/${user._id}`, config)
+      const data = await response.json();
+      
+      setSummary(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDelete = async (serviceName) => {
+    try {
+      const config = {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await fetch(`http://localhost:3020/appointments/deleteone/${serviceName}`, config);
+      
+      if (!response.ok) {
+        throw new Error("Failed to delete appointment");
+      }
+      
+      console.log("Appointment deleted successfully");
+      fetchData();
+    } catch (error) {
+      console.error("Error while deleting appointment:", error);
+    }
+  };
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+    const totalPrice = summary.reduce((acc, item) => acc + item.price, 0);
+    
+    return (
+      <>
       <div className="appointment-container">
         <div className="appointment-form">
           <h1>Book an Appointment</h1>
@@ -69,11 +151,7 @@ const Appointment = () => {
                 style={{ overflow: "hidden" }}
                 >
                 <h3>Select your date for Service:</h3>
-                <Calendar
-                  // onChange={(e)=>handleDate(e)}
-                  onChange={handleDateSelect}
-                  value={selectedDate}
-                  />
+                <Calendar onChange={setSelectedDate} value={selectedDate} minDate={new Date()}/>
               </div>
               <div className="service-select-container">
                 <h3>Select your Service:</h3>
@@ -86,7 +164,8 @@ const Appointment = () => {
                   <option value="">Select a service</option>
                   {services.map((service, index) => (
                     <option key={index} value={service.title}>
-                      {service.title}</option>
+                      {service.title}
+                    </option>
                   ))}
                 </select>
                 <div className="time-slot">
@@ -99,16 +178,27 @@ const Appointment = () => {
                     onChange={handleTimeChange}
                     >
                     <option value="">Select a time</option>
-                    <option value="10:00 am">10:00 am</option>
-                    <option value="11:00 am">11:00 am</option>
-                    <option value="12:00 pm">12:00 pm</option>
-                    <option value="1:00 pm">1:00 pm</option>
-                    <option value="2:00 pm">2:00 pm</option>
-                    <option value="3:00 pm">3:00 pm</option>
-                    <option value="4:00 pm">4:00 pm</option>
-                    <option value="5:00 pm">5:00 pm</option>
+                    <option value={10}>10:00 am</option>
+                    <option value={11}>11:00 am</option>
+                    <option value={12}>12:00 pm</option>
+                    <option value={13}>1:00 pm</option>
+                    <option value={14}>2:00 pm</option>
+                    <option value={15}>3:00 pm</option>
+                    <option value={16}>4:00 pm</option>
+                    <option value={17}>5:00 pm</option>
                   </select>
                 </div>
+                <div className="popup-container">
+    {showPopup && (
+      <div className="popup">
+        <div className="popup-content">
+          <p>{errorMessage}</p>
+           <TiDeleteOutline onClick={handleClosePopup} />
+         
+        </div>
+      </div>
+    )}
+  </div>
               </div>
             </div>
             <div className="submit-button">
@@ -117,22 +207,30 @@ const Appointment = () => {
           </form>
         </div>
         <div className="data-div">
-                    <h2>Summary</h2>
-          {submittedData && (
-            <div className="submitted-data">
-              <p>Date: {submittedData.date.toDateString()}</p>
-              <p>Service: {submittedData.service}</p>
-              <p>Time: {submittedData.time}</p>
-              <p>Price: {submittedData.price}€</p>
-              <h3>Total:{submittedData.total}€</h3>
+          <h2>Summary</h2>
+
+          {summary.map((item, index) => (
+ 
+            <div key={index} className="submitted-data">
+              <div className="display-data">
+              <p>{index + 1} <span>Service: </span>{item.service}</p>
+              <p><span>Date: </span>{new Date(item.startTime).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              <p><span>Time: </span>{new Date(new Date(item.startTime).getTime() - 2 * 60 * 60 * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+              <p><span>Price: </span>{item.price}€</p>
+              </div>
+            <div className="delete-button">
+            <RiDeleteBin6Line onClick={() => handleDelete(item.service)} />
             </div>
-          )}
-        <button className="confirm-button">
-  <span> Confirm
-  </span>
-</button>
-        
+            </div>
+          ))}
+          {/* Display total price */}
+          <div className="total-price">
+            <h3>Total Price: {totalPrice}€</h3>
           </div>
+          <button className="confirm-button">
+            <span> Confirm</span>
+          </button>
+        </div>
       </div>
     </>
   );
