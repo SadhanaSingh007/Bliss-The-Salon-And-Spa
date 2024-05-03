@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './styles.scss';
+import './products.scss';
 import { CartContext } from '../../context/Cart';
 import ProductBackgroundImage from "../../assets/product-background.jpg";
 
@@ -44,8 +44,8 @@ const Products: React.FC = () => {
                         <div className="header-p">
                             <h1>Products </h1>
                             <p className="text-on-image animate__fadeInLeftBig" >
-                                Step into a realm of opulence and grace with our exquisite line of spa and salon products,
-                                where every indulgence is a journey of self-discovery.
+                                "Step into a realm of opulence and grace with our exquisite line of spa and salon products,
+                                where every indulgence is a journey of self-discovery."
                             </p>
                         </div>
                         <div className="imagediv ">

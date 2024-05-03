@@ -9,11 +9,13 @@ import "animate.css";
 import bliss from "../../assets/bliss2.png";
 
 import "./navbar.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Menu from "../Menu/Menu";
+import { CartContext } from "../../context/Cart";
 
 const Navbar = () => {
   const [dropMenu, setDropMenu] = useState(true);
+  const { cartItems } = useContext(CartContext);
 
   const handleDropMenu = () => {
     setDropMenu((prevDropMenu) => !prevDropMenu);
@@ -47,6 +49,7 @@ const Navbar = () => {
         <ul className="cart-ul">
           <Link className="cart-li" to="/cart">
             <PiShoppingCart className="cart-icon" />
+            <span className="btn-badge">{cartItems.length}</span>
           </Link>
           <Link className="cart-li" to="/services">
             <MdOutlineCalendarMonth className="cart-icon" />

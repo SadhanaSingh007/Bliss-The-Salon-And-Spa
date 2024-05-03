@@ -43,8 +43,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const getCartTotal = () => {
-    console.log('toal',cartItems);
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartItems.reduce((previousValue, item) => previousValue + (item.quantity * item.price), 0).toFixed(2)
   };
 
   useEffect(() => {

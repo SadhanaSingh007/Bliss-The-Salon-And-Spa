@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import Services from "../models/Services.js";
-import { config } from "dotenv"
+import { config } from "dotenv";
 
 const servicesData = [
   {
@@ -83,7 +83,7 @@ async function seedServices() {
     mongoose.connection.close();
   }
 }
-config()
+config();
 // Connect to the database and run the seeder function
 mongoose
   .connect(process.env.CONNECTION_STRING)

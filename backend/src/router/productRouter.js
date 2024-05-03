@@ -1,10 +1,7 @@
 import { Router } from "express";
 import Products from "../models/Products.js";
-import multer from "multer";
 
-const upload = multer({ dest: "uploads/" });
 
-const handleUpload = upload.single("image");
 
 const productRouter = Router();
 
@@ -17,7 +14,7 @@ productRouter
       next({ status: 500, message: error.message });
     }
   })
-  .post("/", handleUpload, async (req, res, next) => {
+  .post("/", async (req, res, next) => {
     try {
       const { title, description, price } = req.body;
       const image = req.file.path; 
@@ -33,7 +30,7 @@ productRouter
     } catch (error) {
       next({ status: 500, message: error.message });
     }
-  }).put('/:id', handleUpload, async (req, res) => {
+  }).put('/:id', async (req, res) => {
     try {
       const { title, description, price } = req.body;
       let updateFields = {
@@ -41,9 +38,6 @@ productRouter
         description,
         price
       };
-      if (req.file) {
-        updateFields.image = req.file.path;
-      }
   
       const updatedProduct = await Products.findByIdAndUpdate(req.params.id, updateFields, { new: true });
       if (!updatedProduct) {
