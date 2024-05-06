@@ -9,7 +9,7 @@ const appointmentRouter = Router();
 appointmentRouter.post("/book", authMiddleware,appointmentController.bookAppointment);
 
 appointmentRouter.delete("/deleteall",appointmentController.deleteAllAppointments);
-
+appointmentRouter.delete("/deleteone/:service", appointmentController.deleteSingleAppointment);
 appointmentRouter.get("/:user", authMiddleware, appointmentController.getUserAppointments);
 
 export default appointmentRouter;

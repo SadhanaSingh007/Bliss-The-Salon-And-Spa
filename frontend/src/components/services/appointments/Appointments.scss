@@ -112,7 +112,9 @@
       .react-calendar__navigation__arrow {
         font-size: 1.5rem;
       }
-
+      .react-calendar__tile:disabled {
+        color: gray; 
+      }
       .react-calendar__navigation__label {
         font-size: 1.5rem;
       }
@@ -129,6 +131,29 @@
       width: 60%;
       select {
         width: 100%;
+      }
+      .popup-container{
+position: relative;
+.popup{
+  position: absolute;
+  top: calc(100% + 10px); /* Adjust the distance from the dropdown */
+  left: 0;
+  background-color: transparent;
+  font-size: 1.2rem;
+  border: 1px solid #b08568;
+  padding: 10px;
+  color: #fdf9f6;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  p{
+    color: crimson;
+    font-size: 1rem;
+  }
+}
+.popup-content{
+display: flex;
+}
+
       }
     }
     .form-content {
@@ -166,7 +191,7 @@
       font-size: 1.5rem;
     }
   }
-  /* From uiverse.io by @Ali-Tahmazi99 */
+// Animation confirm Button
   .confirm-button {
     display: inline-block;
     background-color: #1c1919;
@@ -223,6 +248,7 @@
 }
 .submit-button {
   width: 70%;
+  margin-top: 2.5rem;
   text-align: end;
  button {
     background-color: transparent;
@@ -242,17 +268,6 @@
   }
 }
 
-h2 {
-  font-size: 3rem;
-  margin: 2rem;
-  @media screen and (max-width: 1080px) {
-    padding: 2rem;
-    margin-top: 8rem;
-    font-size: 2rem;
-    border-top: 4px double #b08568;
-    border-radius: 20px;
-  }
-}
 .data-div {
   display: flex;
   flex-direction: column;
@@ -260,11 +275,29 @@ h2 {
   align-items: center;
   height: 100%;
   width: 20%;
+  h2 {
+    font-size: 3rem;
+    margin: 2rem;
+    @media screen and (max-width: 1080px) {
+      padding: 2rem;
+      margin-top: 8rem;
+      font-size: 2rem;
+      border-top: 4px double #b08568;
+      border-radius: 20px;
+    }
+  }
 
   .submitted-data {
+   
+    margin: 1rem;
     p {
       font-size: 1.2em;
-      color: #b08568;
+      color: #fbe2d1;
+      span{
+        color: #bd7646;
+        font-weight: bolder;
+        font-size: 1.5rem;
+      }
     }
     h3 {
       align-items: end;
@@ -273,11 +306,17 @@ h2 {
 
     }
     display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
+    align-items: center;
+    justify-content: center;
+gap: 1rem;
+    .delete-button{
+      color: rgb(121, 44, 44);
+      font-size: 2rem;
+    }
 
     @media screen and (max-width: 1080px) {
+      width: 80vw;
+    height: 80vh;
       padding: 0;
       font-size: 15px;
       h3 {

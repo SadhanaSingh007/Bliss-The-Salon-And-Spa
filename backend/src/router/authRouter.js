@@ -34,7 +34,7 @@ authRouter
 
       /// sign token
       const token = jwt.sign({ userID: user._id }, process.env.SECRET, {
-        expiresIn: "12h",
+        expiresIn: "78h",
       });
 
       /// send user an token to frontend

@@ -3,38 +3,43 @@ import Appointment from "../models/Appointment.js";
 const appointmentController = {
   bookAppointment: async (req, res) => {
     try {
-        const { user } = req.params;
-        const { service, date, startTime } = req.body;
-        const parsedStartTime = new Date(startTime);
+      const { user } = req.params;
+      const { price, service, startTime } = req.body;
+      const parsedStartTime = new Date(startTime);
+
       if (!service) {
         throw new error();
       }
+
       const newAppointment = new Appointment({
         service: service,
-        date,
         startTime: parsedStartTime,
+        price: price,
         user: req.body.user,
       });
+
       const appointments = await Appointment.find();
+
       const filteredAppointments = appointments.filter(
         (appointment) => user !== appointment.user.valueOf()
       );
-      
-      const serviceFilteredAppointment = filteredAppointments.filter(
-        (appointment) => service.valueOf() === appointment.service.valueOf()
+
+      const times = filteredAppointments.map((time) =>
+        time.startTime.toLocaleString()
       );
- 
-      if (serviceFilteredAppointment.length != 0) {
-        return res.status(400).json({ message: "Appointment for the same service already exists." })
-    }
-      const filteredTime = filteredAppointments.filter(
-        (appointment) => date === appointment.date
+
+      const filteredTimes = times.filter(
+        (time) => parsedStartTime.toLocaleString() === time
       );
- 
-      if (filteredTime.length != 0) {
-        return res.status(400).json({ message: "Appointment for the same time already exists." })
+
+      if (filteredTimes.length !== 0) {
+        return res.status(400).json({
+          message: "Appointment for the same time already exists.",
+          filteredTimes: filteredTimes,
+        });
       }
       await newAppointment.save();
+
       res.status(201).json({
         message: "Appointment booked successfully",
         appointment: newAppointment,
@@ -53,12 +58,30 @@ const appointmentController = {
     }
   },
 
+  deleteSingleAppointment: async (req, res) => {
+    try {
+      const { service } = req.params;
+      const deletedAppointment = await Appointment.findOneAndDelete({
+        service: service,
+      });
+      if (!deletedAppointment) {
+        return res.status(404).json({ message: "Appointment not found" });
+      }
+      return res
+        .status(200)
+        .json({ message: "Appointment deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting appointment:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  },
+
   getUserAppointments: async (req, res) => {
     try {
       const { user } = req.params;
-     
+
       const appointments = await Appointment.find();
-      
+
       const filteredAppointments = appointments.filter(
         (appointment) => user === appointment.user.valueOf()
       );

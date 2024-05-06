@@ -6,24 +6,24 @@ GET http://localhost:6000/products
 
 
 ###
-POST http://localhost:6000/appointments/book
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjIwMTgyNjEwY2EyYjc5YmIwN2YwMmYiLCJpYXQiOjE3MTMzNzkzNzIsImV4cCI6MTcxMzQyMjU3Mn0.cZJK5UzhcWTfhZfDThkAX9RWv-uHJ88SrPG5Y9vOfMU
+POST http://localhost:3020/appointments/book
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjMzNjNiNWQzMjY0YmE5YjM5Mjg1ZTAiLCJpYXQiOjE3MTQ2NDQzMDcsImV4cCI6MTcxNDkyNTEwN30.drbD2rl-Tjai8huRtiRfFD2FepqxJTryHodbmlTsWKY"
 Content-Type: application/json
 
 {
-     "service": "661d1d7229cdf33978148a91",
-                "startTime": "2024-04-30T10:00:00",
-            "user":"661fb39a7a665b08d70b4c1e"
+    "service": "manicure",
+    "startTime": "2024-05-15T14:00:00.000Z",
+    "user": "663363b5d3264ba9b39285e0"
 }
 ###
-DELETE http://localhost:6000/appointments/deleteall
+DELETE http://localhost:3020/appointments/deleteall
 
 ###
 
-GET http://localhost:6000/appointments/661fb39a7a665b08d70b4c1e
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjIwMTgyNjEwY2EyYjc5YmIwN2YwMmYiLCJpYXQiOjE3MTMzNzkzNzIsImV4cCI6MTcxMzQyMjU3Mn0.cZJK5UzhcWTfhZfDThkAX9RWv-uHJ88SrPG5Y9vOfMU
+GET http://localhost:3020/appointments/662f73e0c38ca2635c578df9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjMwZGMzODA4MTBlZGUwMzg1MGE5MDAiLCJpYXQiOjE3MTQ0NzgxNjMsImV4cCI6MTcxNDUyMTM2M30.pJP45GjcOkjpvv2bFpWWPrpM-unp7B2Np9ZW8LFL12I
 ###
-GET http://localhost:6000/auth/users
+GET http://localhost:3020/auth/users
 
 ###
 

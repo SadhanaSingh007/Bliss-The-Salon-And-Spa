@@ -1,65 +1,73 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './Cart.scss';
 import { CartContext } from '../../context/Cart';
-import Login from '../login/Login';
+import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-
   const Base_Url = 'http://localhost:3020';
-
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true); // Loading state
   const { cartItems, clearCart, getCartTotal, removeFromCart, addToCart } = useContext(CartContext);
+  const { user } = useContext(UserContext);
 
+  useEffect(() => {
+    setLoading(false); // Simulating data loading completion
+  }, []); // Empty dependency array means this effect runs only once after the initial render
+
+  const handleCheckout = () => {
+    if (user) {
+      navigate('/checkout');
+    } else {
+      navigate('/login', { state: { from: '/checkout' } });
+    }
+  };
 
   return (
     <div className="cart-container">
-      <div className="cart-header">
-        <h1>Shopping cart</h1>
-      </div>
-      <div className="cart-items">
-        <div className="cart-item" >
-          <div className="product-details">
-
-            <div>
-              <h2>Product</h2>
-
-            </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <div className="cart-header">
+            <h1>Shopping cart</h1>
           </div>
-          <div className="price">Price</div>
-          <div className="quantity">Quantity</div>
-          <div className="total">Total</div>
-        </div>
-        {cartItems.map(product => (
-          <div className="cart-item" key={product.id}>
-            <div className="product-details">
-              <img src={`${Base_Url}/${product.image}`} alt={product.title} />
-              <div>
-                <h2>{product.title}</h2>
-                <button className="remove-button">Remove</button>
+          <div className="cart-items">
+            {cartItems.map((product) => (
+              <div className="cart-item" key={product._id}>
+                <div className="product-details">
+                  <img src={`${Base_Url}/${product.image}`} alt={product.title} />
+                  <div>
+                    <h2>{product.title}</h2>
+                    <button className="remove-button" onClick={() => removeFromCart(product)}>Remove</button>
+                  </div>
+                </div>
+                <div className="price">€{product.price}</div>
+                <div className="quantity">
+                  <button className='cartProductAddRemove' onClick={() => removeFromCart(product)}>-</button>
+                  {product.quantity}
+                  <button className='cartProductAddRemove' onClick={() => addToCart(product)}>+</button>
+                </div>
+                <div className="total">€{product.quantity * product.price}</div>
               </div>
-            </div>
-            <div className="price">€{product.price}</div>
-            <div className="quantity">{product.quantity}</div>
-            <div className="total">€{product.quantity * product.price}</div>
+            ))}
           </div>
-        ))}
-      </div>
-
-      <div className="order-summary">
-        <h2>Order summary</h2>
-        <div className="subtotal">
-          <span>Subtotal</span>
-          <span>€{cartItems.reduce((previousValue, item) => previousValue + (item.quantity * item.price), 0).toFixed(2)}</span>
-        </div>
-        <div className="total">
-          <span>Total (Inclusive of tax €0.00)</span>
-          <span>€{cartItems.reduce((previousValue, item) => previousValue + (item.quantity * item.price), 0).toFixed(2)}</span>
-        </div>
-        <button className="checkout-button">Checkout</button>
-      </div>
-      <div >
-        <p>You need to login first to continue checkout</p>
-        <Login></Login>
-      </div>
+          <div className="order-summary">
+            <h2>Order summary</h2>
+            <div className="subtotal">
+              <span>Subtotal</span>
+              <span>€{getCartTotal()}</span>
+            </div>
+            <div className="total">
+              <span>Total (Inclusive of tax €0.00)</span>
+              <span>€{getCartTotal()}</span>
+            </div>
+            <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
+            <button className="clear-cart-button" onClick={clearCart}>Clear Cart</button>
+          </div>
+          {!user && <p style={{ color: "white" }}>You need to login first to continue checkout</p>}
+        </>
+      )}
     </div>
   );
 };

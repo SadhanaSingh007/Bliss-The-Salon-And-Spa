@@ -9,19 +9,24 @@ const Login = () => {
   const [showPassword, setShowpassword] = useState(false);
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
-
   const navigate = useNavigate();
   const { setToken, setUser, token, setIsLoggedIn } = useUser();
+
+  // const handleShowPassword = () => {
+  //   setShowpassword((prev) => !prev);
+  // };
+
+  useEffect(() => {
+    if (token) {
+      // Check if the login redirect state exists and navigate accordingly
+      const destination = location.state?.from || "/";
+      navigate(destination);
+    }
+  }, [token, navigate, location.state]);
 
   const handleShowPassword = () => {
     setShowpassword((prev) => !prev);
   };
-
-  useEffect(() => {
-    if (token) {
-      navigate("/");
-    }
-  }, [token]);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,21 +34,20 @@ const Login = () => {
     const password = passwordInput.current!.value.trim() || "";
     console.log(email, password);
     try {
-      const config = {
+      const response = await fetch("http://localhost:3020/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      };
-      const request = await fetch("http://localhost:3020/auth/login", config);
-      const result = await request.json();
-      console.log(result);
+      });
+      const result = await response.json();
       if (!result.error) {
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
         setToken(result.token);
         setUser(result.user);
+
         setIsLoggedIn(true);
         navigate("/");
       }
@@ -64,24 +68,22 @@ const Login = () => {
             placeholder="Email"
           />
         </div>
-
         <div className="input-div">
           {showPassword ? (
             <input
               ref={passwordInput}
-              className="login-input "
+              className="login-input"
               type="text"
               placeholder="Password"
             />
           ) : (
             <input
               ref={passwordInput}
-              className="login-input "
+              className="login-input"
               type="password"
               placeholder="Password"
             />
           )}
-
           <span className="eye-icon" onClick={handleShowPassword}>
             {showPassword ? <FaEye /> : <FaEyeSlash />}
           </span>
@@ -89,7 +91,7 @@ const Login = () => {
         <div className="login-div">
           <button type="submit" className="login-button">
             Login
-          </button>{" "}
+          </button>
           <Link className="register" to="/register">
             Create an account
           </Link>
