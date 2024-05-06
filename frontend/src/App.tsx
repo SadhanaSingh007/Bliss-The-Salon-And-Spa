@@ -10,6 +10,7 @@ import { CartProvider } from "./context/Cart";
 import { ServiceProvider } from "./context/serviceContext";
 import Contact from "./components/contact/Contact";
 import Appointment from "./components/services/appointments/Appointments";
+import Logout from "./components/logout/Logout";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/logout" element={<Logout />} />
           </Routes>
         </ServiceProvider>
       </CartProvider>

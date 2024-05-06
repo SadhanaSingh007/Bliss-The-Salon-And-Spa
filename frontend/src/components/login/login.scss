@@ -10,7 +10,7 @@
     font-family: serif;
     font-style: italic;
     font-size: 2rem;
-    width: 600px;
+    width: 650px;
     padding: 4rem;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@
     //box-shadow: 0px 5px 15px -2px rgb(0, 0, 0);
     border-radius: 25px;
     @media screen and (max-width: 768px) {
-      width: 480px;
+      width: 500px;
       box-shadow: none;
       border-radius: 0;
     }

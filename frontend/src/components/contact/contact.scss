@@ -1,10 +1,10 @@
 .contact-container {
   .visit-us {
     display: flex;
+    justify-content: end;
     align-items: center;
-    justify-content: center;
-    background-image: url("../../assets/contact01.jpg");
-    background-position: center;
+    background-image: url("../../assets/contact6.jpg");
+    background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -14,7 +14,6 @@
     h1 {
       letter-spacing: 1.5rem;
       font-size: 3.5rem;
-      padding-bottom: 15rem;
       text-shadow: 3px 3px 7px black;
     }
   }

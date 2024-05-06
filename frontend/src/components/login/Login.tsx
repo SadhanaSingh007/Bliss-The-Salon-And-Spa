@@ -3,19 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
-import { useUser, UserContext } from "../../context/UserContext";
-
-interface UserContext {
-  setToken: (value: string) => void;
-  setUser: (value: UserType) => void;
-  token: string | null; // Assuming token is of type string
-}
-
-type UserType = {
-  id: number;
-  email: string;
-  password: string;
-};
+import { useUser } from "../../context/UserContext";
 
 const Login = () => {
   const [showPassword, setShowpassword] = useState(false);
@@ -23,7 +11,7 @@ const Login = () => {
   const passwordInput = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
-  const { setToken, setUser, token }: UserContext = useUser();
+  const { setToken, setUser, token, setIsLoggedIn } = useUser();
 
   const handleShowPassword = () => {
     setShowpassword((prev) => !prev);
@@ -37,8 +25,8 @@ const Login = () => {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const email = emailInput.current.value.trim() || "";
-    const password = passwordInput.current.value.trim() || "";
+    const email = emailInput.current!.value.trim() || "";
+    const password = passwordInput.current!.value.trim() || "";
     console.log(email, password);
     try {
       const config = {
@@ -56,6 +44,7 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(result.user));
         setToken(result.token);
         setUser(result.user);
+        setIsLoggedIn(true);
         navigate("/");
       }
     } catch (error) {
