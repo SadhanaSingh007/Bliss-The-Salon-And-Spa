@@ -12,9 +12,10 @@ const Login = () => {
   const navigate = useNavigate();
   const { setToken, setUser, token, setIsLoggedIn } = useUser();
 
-  // const handleShowPassword = () => {
-  //   setShowpassword((prev) => !prev);
-  // };
+  const handleShowPassword = () => {
+    setShowpassword((prev) => !prev);
+  };
+  console.log(token);
 
   useEffect(() => {
     if (token) {

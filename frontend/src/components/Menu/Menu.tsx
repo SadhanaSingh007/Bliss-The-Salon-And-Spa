@@ -9,7 +9,6 @@ interface MenuProps {
 
 const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
   const { isLoggedIn } = useUser();
-  console.log("isLoggedIn:", isLoggedIn);
 
   return (
     <div className={`menu ${dropMenu ? "hidden" : "active"}`}>

@@ -3,6 +3,7 @@ import React, {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
@@ -36,6 +37,11 @@ export const UserProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState(defaultUser);
   const [token, setToken] = useState(defaultToken);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
   return (
     <UserContext.Provider
       value={{ user, setUser, token, setToken, isLoggedIn, setIsLoggedIn }}
