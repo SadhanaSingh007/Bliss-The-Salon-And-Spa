@@ -1,68 +1,55 @@
-import React, { useEffect, useRef, useState, useContext } from 'react';
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import './login.scss';
-import { useUser, UserContext } from '../../context/UserContext';
-import CheckoutForm from '../checkout/CheckoutForm';
-
-interface UserContext {
-  setToken: (value: string) => void;
-  setUser: (value: UserType) => void;
-  token: string | null; // Assuming token is of type string
-}
-
-type UserType = {
-  id: number;
-  email: string;
-  password: string;
-};
+import "./login.scss";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+import { useUser } from "../../context/UserContext";
 
 const Login = () => {
   const [showPassword, setShowpassword] = useState(false);
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  const { setToken, setUser, token } = useUser();
+  const { setToken, setUser, token, setIsLoggedIn } = useUser();
+
+  // const handleShowPassword = () => {
+  //   setShowpassword((prev) => !prev);
+  // };
 
   useEffect(() => {
     if (token) {
       // Check if the login redirect state exists and navigate accordingly
-      const destination = location.state?.from || '/';
+      const destination = location.state?.from || "/";
       navigate(destination);
     }
   }, [token, navigate, location.state]);
-
-  const handleShowPassword = () => {
-    setShowpassword((prev) => !prev);
-  };
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const email = emailInput.current?.value.trim() || "";
     const password = passwordInput.current?.value.trim() || "";
     try {
-      const response = await fetch("http://localhost:3020/auth/login", {
+      const config = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      });
-      const result = await response.json();
+      };
+      const request = await fetch("http://localhost:3020/auth/login", config);
+      const result = await request.json();
+      console.log(result);
       if (!result.error) {
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
         setToken(result.token);
         setUser(result.user);
-        // Navigate to the intended destination or fallback to home
-        const CheckoutForm = location.state?.from || '/';
-        navigate(CheckoutForm);
-      } else {
-        console.log('Login error:', result.error);
+
+        setIsLoggedIn(true);
+        navigate("/");
       }
     } catch (error) {
-      console.log('Network error:', error.message);
+      console.log("Network error:", error.message);
     }
   };
 
@@ -110,5 +97,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
