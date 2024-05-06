@@ -24,24 +24,22 @@ const Login = () => {
     }
   }, [token, navigate, location.state]);
 
-  const handleShowPassword = () => {
-    setShowpassword((prev) => !prev);
-  };
-
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const email = emailInput.current!.value.trim() || "";
     const password = passwordInput.current!.value.trim() || "";
     console.log(email, password);
     try {
-      const response = await fetch("http://localhost:3020/auth/login", {
+      const config = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      });
-      const result = await response.json();
+      };
+      const request = await fetch("http://localhost:3020/auth/login", config);
+      const result = await request.json();
+      console.log(result);
       if (!result.error) {
         localStorage.setItem("token", result.token);
         localStorage.setItem("user", JSON.stringify(result.user));
@@ -100,5 +98,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
