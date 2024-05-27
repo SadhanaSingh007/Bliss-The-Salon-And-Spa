@@ -34,8 +34,8 @@ authRouter
   })
   .post(
     "/register",
-    validateUser,
     validateUserEmail,
+    validateUser,
     async (req, res, next) => {
       try {
         const newUser = await User.register(req.body);
