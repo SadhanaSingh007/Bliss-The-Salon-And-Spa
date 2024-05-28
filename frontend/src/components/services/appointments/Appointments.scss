@@ -44,7 +44,9 @@
       h1 {
         font-size: 2rem;
         @media screen and (max-width: 1080px) {
+
           font-size: 1.2rem;
+
         }
       }
     }
@@ -72,12 +74,21 @@
       font-size: 12px;
      }
     }
+
+
+    @media screen and (max-width: 680px) {
+  
+      height: 100vh;
+     
+    }
+
     .calendar-container {
       width: 61%;
       // overflow: hidden;
       // font-size: 16px;
       @media screen and (max-width: 1080px) {
        width: 50%;
+
        height: 100%;
       }
       @media screen and (max-width: 580px) {
@@ -88,6 +99,9 @@
         }
         
        }
+
+      }
+
       
       .react-calendar {
         font-size: 1.2rem;
@@ -125,10 +139,13 @@
         span{
  font-size: 20px;
  @media screen and (max-width: 1080px) {
+
   abbr{
     font-size: 10px;
     padding: 1px;
   }
+
+
   font-size: 10px;
 }
         }
