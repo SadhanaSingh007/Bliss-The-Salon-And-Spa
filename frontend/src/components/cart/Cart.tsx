@@ -17,7 +17,7 @@ const Cart = () => {
   const Base_Url = `${import.meta.env.VITE_backend_url}`;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const { cartItems, clearCart, getCartTotal, removeFromCart, addToCart } = useContext(CartContext);
+  const { cartItems, clearCart, getCartTotal, removeFromCart, addToCart ,removeProductFromCart} = useContext(CartContext);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Cart = () => {
                     <img src={`${Base_Url}${product.image}`} alt={product.title} />
                     <div>
                       <h2>{product.title}</h2>
-                      <button className="remove-button" onClick={() => removeFromCart(product)}>Remove</button>
+                      <button className="remove-button" onClick={() => removeProductFromCart(product)}>Remove</button>
                     </div>
                   </div>
                   <div className="price">€{product.price}</div>

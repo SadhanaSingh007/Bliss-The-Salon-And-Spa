@@ -73,7 +73,7 @@ const CheckoutForm: React.FC = () => {
   };
 
   useEffect(() => {
-    emailjs.init("MCP7eN1sKKWReuKKW");
+    emailjs.init("e6daJfeyQvFUseFna");
   }, []);
 
   const handleInputChange = (
@@ -124,8 +124,8 @@ const CheckoutForm: React.FC = () => {
       console.log("formattedTemplate", formattedTemplate);
 
       await emailjs.send(
-        "service_m46fwtd",
-        "template_vovbtec",
+        "service_eemhgz8",
+        "template_m8ip865",
         formattedTemplate
       );
 
@@ -272,12 +272,12 @@ const CheckoutForm: React.FC = () => {
             >
               <span>Pay now</span>
               <RotatingLines
-              strokeColor="grey"
-              strokeWidth="3"
-              animationDuration="0.75"
-              width="35"
-              visible={showSpinner}
-            />
+                strokeColor="grey"
+                strokeWidth="3"
+                animationDuration="0.75"
+                width="35"
+                visible={showSpinner}
+              />
             </button>
           </div>
         </div>
