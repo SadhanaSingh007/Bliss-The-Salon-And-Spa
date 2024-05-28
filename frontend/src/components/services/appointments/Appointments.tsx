@@ -1,20 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-// import React, { useEffect, useRef, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
 import Calendar from "react-calendar";
 import emailjs from "emailjs-com";
-// import  bliss2 from "../../../assets/bliss2.png"
 import "./Appointments.scss";
 import { useUser } from "../../../context/UserContext.tsx";
 import { useServiceContext } from "../../../context/serviceContext.tsx";
 import { useNavigate } from "react-router-dom";
 import "./Appointments.scss";
 // import EmailGenerator from"./email/EmailGenerator.tsx";
-
-
-
-
 
 
 const Appointment = () => {
@@ -38,7 +32,6 @@ const Appointment = () => {
 
   useEffect(() => {
     fetchServices();
-    // fetchData();
   }, []);
 
   useEffect(() => {
@@ -98,7 +91,7 @@ const Appointment = () => {
         `${import.meta.env.VITE_backend_url}appointments/book`,
         config
       );
-      console.log("this is response of proceed", response);
+      
       if (response.status === 400) {
         const responseData = await response.json();
         setErrorMessage(responseData.message);
@@ -112,8 +105,7 @@ const Appointment = () => {
       setSelectedService("");
       setSelectedTime(0);
       fetchData();
-      // activeRef.current.removeAttribute("active")
-      // setActive(false)
+     
     } catch (error) {
       console.error("Error while booking appointment:", error);
     }
@@ -205,6 +197,7 @@ return true
 
   const handleConfirmBooking = async (): Promise<boolean>  => {
     try {
+      const bookingConfirmed = true
       const bookedServices= summary.map((item: any) => ({
         service: item.service,
         startTime: item.startTime,
@@ -220,10 +213,10 @@ return true
         },
         body: JSON.stringify({ bookedServices }),
       };
-      console.log("this is config", config);
+    
 
       const response = await fetch(`${import.meta.env.VITE_backend_url}bookingConfirm/book`, config);
-      console.log("this is response of confirmed booking", response);
+    
       if (!response.ok) {
 
         const responseData = await response.json();
@@ -236,6 +229,7 @@ return true
       updateSummary([]);
       navigate("/bookingDetails");
       console.log("Confirmed booking successfully:", result);
+      return bookingConfirmed;
     } catch (error) {
       console.error("Error while confirming booking:", error);
     }
@@ -323,14 +317,10 @@ return true
                 <div key={index} className="submitted-data">
                   <h4>{index + 1})  </h4>
                   <div className="display-data">
-
-                    {/* <div className="number"> */}
-
                     <p>
                       <span>Service: </span>
                       {item.service}
                     </p>
-                    {/* </div> */}
                     <p>
                       <span>Date: </span>
                       {new Date(item.startTime).toLocaleDateString("en-US", {

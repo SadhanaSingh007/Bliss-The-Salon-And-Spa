@@ -6,7 +6,7 @@ import { useServiceContext } from "../../../../context/serviceContext";
 const BookingDetail = () => {
   const { bookingDetail } = useServiceContext();
   const totalAmount = bookingDetail.reduce((total, item) => total + item.price, 0);
-console.log("this is booking details", bookingDetail);
+
   return (
     <div className="wrap-container">
     <div className="booking-details-container">
