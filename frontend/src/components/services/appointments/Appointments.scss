@@ -41,7 +41,7 @@
       h1 {
         font-size: 2rem;
         @media screen and (max-width: 1080px) {
-          font-size: 1.8rem;
+          font-size: 1.6rem;
         }
       }
     }
@@ -62,15 +62,19 @@
         }
       }
     }
-
+    @media screen and (max-width: 680px) {
+  
+      height: 100vh;
+     
+    }
     .calendar-container {
       width: 61%;
       // overflow: hidden;
       // font-size: 16px;
       @media screen and (max-width: 1080px) {
-        height: 50%;
+       width: 50%;
       }
-
+      
       .react-calendar {
         font-size: 1.2rem;
         font-family: serif;
@@ -95,7 +99,7 @@
         padding: 0.5rem;
         @media screen and (max-width: 1080px) {
           padding: 5px;
-          font-size: 14px;
+          font-size: 12px;
         }
       }
 
@@ -103,16 +107,30 @@
         border: 2px solid #b08568;
         border-radius: 20px;
       }
+      .react-calendar__navigation{
+        span{
+ font-size: 20px;
+ @media screen and (max-width: 1080px) {
+  
+  font-size: 10px;
+}
+        }
 
+      }
       .react-calendar__navigation button {
         background-color: transparent;
         color: #efe6e6;
-        font-size: 1rem;
+        font-size: 10px;
         border: none;
         margin-left: 1.3rem;
 
         @media screen and (max-width: 1080px) {
           padding: 0;
+          font-size: 14px;
+        }
+        @media screen and (max-width: 580px) {
+          padding: 0;
+          margin: 5px;
           font-size: 12px;
         }
       }
@@ -270,11 +288,16 @@
   position: relative; /* Ensure relative positioning for containing pseudo-elements */
 
   @media screen and (max-width: 1080px) {
-    width: 15rem;
+    width: 12rem;
     align-items: center;
     margin-top: 7.5rem;
   }
 
+  @media screen and (max-width: 680px) {
+    width: 12rem;
+    align-items: center;
+    margin-top: 8.5rem;
+  }
   button {
     position: relative; /* Ensure relative positioning for pseudo-elements */
     background-color: transparent;
