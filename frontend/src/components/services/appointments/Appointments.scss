@@ -15,6 +15,7 @@
     border-radius: 0;
     width: 90vw;
   }
+  
   padding: 0;
 
 
@@ -72,6 +73,17 @@
       font-size: 12px;
      }
     }
+
+
+    @media screen and (max-width: 680px) {
+
+      
+      height: 100vh;
+     h3{
+      font-size: 12px;
+     }
+    }
+
     .calendar-container {
       width: 61%;
       // overflow: hidden;
