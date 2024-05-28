@@ -14,6 +14,9 @@
     box-shadow: none;
     border-radius: 0;
   }
+  @media screen and (max-width: 1080px) {
+  width: 100vw;
+  }
 
   .appointment-form {
     border-right: #b08568 double 6px;
@@ -41,7 +44,7 @@
       h1 {
         font-size: 2rem;
         @media screen and (max-width: 1080px) {
-          font-size: 1.6rem;
+          font-size: 1.2rem;
         }
       }
     }
@@ -58,14 +61,16 @@
         gap: 0;
         flex-direction: column;
         h3 {
-          font-size: 1.1rem;
+          font-size: 14px;
         }
       }
+   
     }
     @media screen and (max-width: 680px) {
-  
       height: 100vh;
-     
+     h3{
+      font-size: 12px;
+     }
     }
     .calendar-container {
       width: 61%;
@@ -73,7 +78,16 @@
       // font-size: 16px;
       @media screen and (max-width: 1080px) {
        width: 50%;
+       height: 100%;
       }
+      @media screen and (max-width: 580px) {
+        width: 80%;
+        height: 100vh;
+        h3{
+          font-size: 16px;
+        }
+        
+       }
       
       .react-calendar {
         font-size: 1.2rem;
@@ -111,7 +125,10 @@
         span{
  font-size: 20px;
  @media screen and (max-width: 1080px) {
-  
+  abbr{
+    font-size: 10px;
+    padding: 1px;
+  }
   font-size: 10px;
 }
         }
@@ -204,6 +221,10 @@
       border-radius: 10px;
       font-size: 1rem;
       font-family: serif;
+      @media screen and (max-width: 580px) {
+     padding: 0.5rem;
+        font-size: 12px;
+      }
     }
     #service-date {
       padding: 1rem;
