@@ -179,10 +179,10 @@ const Appointment = () => {
         };
 
         await emailjs.send(
-          "service_m46fwtd",
-          "template_4mwvxay",
+          "service_cw984oh",
+          "template_60m5zre",
           template,
-          "MCP7eN1sKKWReuKKW"
+          "UyHBOpXf_O0tp1EIb"
         );
         console.log("Confirmation email sent successfully");
 return true
