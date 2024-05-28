@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '../../../../context/UserContext.tsx';
 import { useNavigate } from 'react-router-dom';
 import "./ConfirmedBooking.scss"
-// import './Appointments.scss';
+
 
 const ConfirmedBooking = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const { token, user } = useUser();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -24,8 +24,8 @@ const ConfirmedBooking = () => {
           config
         );
         const data = await response.json();
-        setBookings(data); // Set the bookings state with fetched data
-        setLoading(false); // Set loading to false after data is fetched
+        setBookings(data); 
+        setLoading(false); 
       } catch (error) {
         console.error('Error fetching bookings:', error);
         setLoading(false);
