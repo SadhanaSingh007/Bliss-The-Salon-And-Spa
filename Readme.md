@@ -23,7 +23,9 @@ The Bliss Salon and Spa full stack website is a comprehensive platform designed 
 - **JWT (JSON Web Tokens)** for authentication :key:
 - **Axios** for making HTTP requests from the frontend :globe_with_meridians:
 - **Stripe** for payment processing :credit_card:
+
 - **Calendlar** for booking calendar management :date:
+
 - **EmailJS** for sending emails :e-mail:
 ## Team Members :busts_in_silhouette:
 - [**Yusra Ahmad**](https://github.com/Yusra-Ahmad)
