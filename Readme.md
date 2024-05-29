@@ -25,12 +25,12 @@ The Bliss Salon and Spa full stack website is a comprehensive platform designed 
 - **Candler** for booking calendar management :date:
 - **EmailJS** for sending emails :e-mail:
 ## Team Members :busts_in_silhouette:
-- **Yusra Ahmad**
-- **Sadhana Singh**
-- **Hetal Ahir**
-- **Sachin patil**
+- [**Yusra Ahmad**](https://github.com/Yusra-Ahmad)
+- [**Sadhana Singh**](https://github.com/SadhanaSingh007)
+- [**Hetal Ahir**](https://github.com/Hetal2409)
+- [**Sachin patil**](https://github.com/Sachin-patil07)
 ## Accessing the Website :earth_africa:
-Visit the deployed website at: [Bliss Salon and Spa](http://example.com)
+Visit the deployed website at: [Bliss Salon and Spa](https://final-project-sug3.onrender.com/)
 
 
 
