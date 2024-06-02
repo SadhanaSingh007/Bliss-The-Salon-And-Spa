@@ -1,4 +1,5 @@
-# Bliss Salon and Spa Full Stack Website:sparkles:
+# Bliss Salon and Spa Full Stack Website
+![image](https://github.com/SadhanaSingh007/Final-Project/blob/af089326b69ced08a4a2baee3259b5d668c0693e/Screenshot%20from%202024-05-29%2011-31-01.png)
 ## Project Overview :star2:
 The Bliss Salon and Spa full stack website is a comprehensive platform designed to facilitate various functionalities such as booking salon services, purchasing products, and managing user authentication. The project is developed by a team of talented developers focusing on both front-end and back-end technologies to ensure a seamless user experience and robust functionality.
 ## Features :globe_with_meridians:
@@ -22,15 +23,17 @@ The Bliss Salon and Spa full stack website is a comprehensive platform designed 
 - **JWT (JSON Web Tokens)** for authentication :key:
 - **Axios** for making HTTP requests from the frontend :globe_with_meridians:
 - **Stripe** for payment processing :credit_card:
-- **Candler** for booking calendar management :date:
+
+- **Calendlar** for booking calendar management :date:
+
 - **EmailJS** for sending emails :e-mail:
 ## Team Members :busts_in_silhouette:
-- **Yusra Ahmad**
-- **Sadhana Singh**
-- **Hetal Ahir**
-- **Sachin patil**
+- [**Yusra Ahmad**](https://github.com/Yusra-Ahmad)
+- [**Sadhana Singh**](https://github.com/SadhanaSingh007)
+- [**Hetal Ahir**](https://github.com/Hetal2409)
+- [**Sachin patil**](https://github.com/Sachin-patil07)
 ## Accessing the Website :earth_africa:
-Visit the deployed website at: [Bliss Salon and Spa](http://example.com)
+Visit the deployed website at: [Bliss Salon and Spa](https://final-project-sug3.onrender.com/)
 
 
 

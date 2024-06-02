@@ -26,7 +26,15 @@ body.menu-open::-webkit-scrollbar {
     list-style: none;
     padding-inline: 2rem;
     z-index: 10;
-
+    .flex-item {
+      width: 33%;
+    }
+    @media screen and (max-width: 576px) {
+      .logo {
+        display: block;
+        text-align: center;
+      }
+    }
     img {
       width: 80%;
       max-width: 10rem;

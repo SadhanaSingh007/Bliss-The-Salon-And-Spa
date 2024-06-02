@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
   return (
     <div className="navbar-container">
       <div className="navbar">
-        <ul>
+        <ul className="flex-item">
           {dropMenu ? (
             <li onClick={handleDropMenu} className="menu-icon">
               {!isMobile && <span>Menu</span>}
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
           )}
           <Menu handleDropMenu={handleDropMenu} dropMenu={dropMenu} />
         </ul>
-        <Link className={`${dropMenu ? "" : "hidden"}`} to="/">
+        <Link className={`flex-item logo ${dropMenu ? "" : "hidden"}`} to="/">
           <img src={bliss} alt="Bliss" />
         </Link>
 

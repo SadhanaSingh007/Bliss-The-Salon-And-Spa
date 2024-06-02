@@ -17,9 +17,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   animation: slideDown 1.5s ease-out forwards;
   // transition: transform 0.7s ease, opacity 0.7s ease;
+
   transform-origin: top;
+  overflow: hidden;
 
   ul {
     display: flex;
@@ -61,6 +64,7 @@
 
 .hidden {
   opacity: 0;
+
 }
 
 @keyframes slideDown {
@@ -72,4 +76,5 @@
     transform: translateY(0);
     opacity: 1;
   }
+
 }
