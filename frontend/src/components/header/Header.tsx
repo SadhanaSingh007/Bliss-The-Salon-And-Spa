@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState, WheelEvent } from "react";
 import { Link } from "react-router-dom";
 import "./header.scss";
-import Navbar from "../navbar/Navbar";
 import logo from "../../assets/logo.svg";
 
 const App = () => {
@@ -111,8 +110,6 @@ const App = () => {
       onTouchMove={wheelEnabled ? handleTouchMove : undefined}
       onWheel={wheelEnabled ? handleWheel : undefined}
     >
-      <Navbar />
-
       <div
         className="page page1"
         style={{
