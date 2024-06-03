@@ -20,7 +20,6 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log('base1_url', import.meta.env);
     if (token) {
       const fromPath = location?.state?.from?.pathname || "/";
       let destination = "/";
@@ -51,7 +50,10 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       };
-      const request = await fetch(`${import.meta.env.VITE_backend_url}auth/login`, config);
+      const request = await fetch(
+        `${import.meta.env.VITE_backend_url}auth/login`,
+        config
+      );
       const result = await request.json();
 
       if (!result.error) {

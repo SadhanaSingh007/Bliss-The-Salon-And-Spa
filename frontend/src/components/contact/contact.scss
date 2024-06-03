@@ -12,6 +12,8 @@
     height: 100vh;
     font-family: serif;
 
+    animation: myBackgroundAnim 1.5s ease-in 0s 1 normal forwards;
+
     h1 {
       letter-spacing: 1.5rem;
       font-size: 3.5rem;
@@ -122,5 +124,16 @@
         font-size: 1.3rem;
       }
     }
+  }
+}
+
+@keyframes myBackgroundAnim {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

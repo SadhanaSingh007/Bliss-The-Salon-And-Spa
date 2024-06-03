@@ -8,8 +8,15 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    animation: myBackgroundAnim 1.5s ease-in 0s 1 normal forwards;
     img {
       width: 750px;
+      @media screen and (max-width: 768px) {
+        width: 90%;
+      }
+      @media screen and (max-width: 576px) {
+        width: 100%;
+      }
     }
     canvas {
       position: absolute;
@@ -28,12 +35,6 @@
     color: white;
     display: flex;
     justify-content: left;
-
-    // .about-img {
-    //   width: 700px;
-    //   margin-left: 3rem;
-    //   margin-top: 3rem;
-    // }
 
     .inner-div-content {
       padding-block: 5rem;
@@ -72,52 +73,65 @@
       position: relative;
       padding-bottom: 5px;
       &::before {
-        // Pseudo-element for the border animation
         content: "";
         position: absolute;
         bottom: 0;
-        left: 0; // Initial position at left
-        width: 100%; // Initial width 0
-        height: 5px; // Border height
+        left: 0;
+        width: 100%;
+        height: 5px;
 
-        background-color: #584030; // Border color
-        transition: width 0.5s ease; // Transition effect
+        background-color: #584030;
+        transition: width 0.5s ease;
       }
       &:hover::before {
-        // Change width on hover
-
-        width: 0; // Full width on hover
+        width: 0;
       }
     }
   }
-
-  .contact {
+  .contact-container {
     height: 100vh;
-    line-height: 3rem;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    h1 {
-      margin-bottom: 1rem;
-      letter-spacing: 0.5rem;
-      word-spacing: 0.2rem;
-      font-size: 3.2rem;
-      font-style: italic;
-      font-weight: 200;
-    }
-    p,
-    span {
-      font-size: 1.5rem;
-    }
-
-    div {
+    .contact {
+      line-height: 3rem;
       display: flex;
-      gap: 1rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      h1 {
+        margin-bottom: 1rem;
+        letter-spacing: 0.5rem;
+        word-spacing: 0.2rem;
+        font-size: 3.2rem;
+        font-style: italic;
+        font-weight: 200;
+      }
+      p,
+      span {
+        font-size: 1.5rem;
+      }
 
-      .contact-number {
-        text-decoration: underline;
+      div {
+        display: flex;
+        gap: 1rem;
+
+        .contact-number {
+          text-decoration: underline;
+        }
       }
     }
+  }
+}
+
+@keyframes myBackgroundAnim {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

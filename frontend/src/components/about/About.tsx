@@ -37,18 +37,19 @@ const About = () => {
           </p>
         </div>
       </div>
-
-      <div className="contact">
-        <h1>Come and visit us </h1>
-        <p>123 Fake Street Berlin, 10115 Germany</p>
-        <div>
-          <Link className="contact-link" to="/contact">
-            <span> contact us</span>
-          </Link>
-          <span>|</span>
+      <div className="contact-container">
+        <div className="contact">
+          <h1>Come and visit us </h1>
+          <p>123 Fake Street Berlin, 10115 Germany</p>
           <div>
-            <span>tel:</span>
-            <p className="contact-number">+49 30 000000000</p>
+            <Link className="contact-link" to="/contact">
+              <span> contact us</span>
+            </Link>
+            <span>|</span>
+            <div>
+              <span>tel:</span>
+              <p className="contact-number">+49 30 000000000</p>
+            </div>
           </div>
         </div>
       </div>

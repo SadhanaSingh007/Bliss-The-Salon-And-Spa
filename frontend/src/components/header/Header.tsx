@@ -1,13 +1,16 @@
-import { useEffect, useRef, useState, WheelEvent } from "react";
+import { useCallback, useEffect, useRef, useState, WheelEvent } from "react";
 import { Link } from "react-router-dom";
 import "./header.scss";
 import Navbar from "../navbar/Navbar";
+import logo from "../../assets/logo.svg";
+
 
 const App = () => {
   const pagesRef = useRef<HTMLDivElement[]>([]);
   const currentPageRef = useRef<number>(0);
   const isTransitioningRef = useRef<boolean>(false);
   const [wheelEnabled, setWheelEnabled] = useState(true);
+  const [startY, setStartY] = useState<number | null>(null);
 
   useEffect(() => {
     showInitialPage();
@@ -71,26 +74,64 @@ const App = () => {
     scrollToSection(direction);
   };
 
+  const handleTouchStart = useCallback(
+    (event: React.TouchEvent<HTMLDivElement>) => {
+      const touch = event.touches[0];
+      setStartY(touch.clientY);
+    },
+    []
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    setStartY(null);
+  }, []);
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (startY === null) return;
+
+    const touch = event.touches[0];
+    const currentY = touch.clientY;
+    const deltaY = startY - currentY;
+
+    console.log("Scroll delta:", deltaY);
+    console.log(Math.sign(deltaY));
+
+    // You can handle the scroll logic here
+
+    setStartY(currentY); // Update the startY for the next move event
+    const direction = Math.sign(deltaY); // either 1 or -1 depending on scroll direction
+    setWheelEnabled(() => false); // cant run scroll multiple times
+    scrollToSection(direction);
+  };
+
   return (
-    <div className="hero" onWheel={wheelEnabled ? handleWheel : undefined}>
-      <Navbar />
+    <div
+      className="hero"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchMove={wheelEnabled ? handleTouchMove : undefined}
+      onWheel={wheelEnabled ? handleWheel : undefined}
+    >
+     
 
       <div
         className="page page1"
         style={{
           transform: "translateY(0px)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         ref={(el: HTMLDivElement): void => {
           if (pagesRef.current.length < 1) {
             el && pagesRef.current.push(el);
           }
         }}
-      ></div>
+      >
+        <img src={logo} alt="logo" className="logo-img" />
+      </div>
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         className="page page2"
         ref={(el: HTMLDivElement): void => {
@@ -114,7 +155,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         className="page page3"
         ref={(el: HTMLDivElement): void => {
@@ -138,7 +179,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         className="page page4"
         ref={(el: HTMLDivElement): void => {
@@ -164,7 +205,7 @@ const App = () => {
       <div
         style={{
           transform: "translateY(100vh)",
-          transition: "transform ease-out 1s",
+          transition: "transform ease-out 1.5s",
         }}
         className="page page5"
         ref={(el: HTMLDivElement): void => {
@@ -174,6 +215,7 @@ const App = () => {
         }}
       >
         <div className="about inner-page-div">
+          <img src={logo} alt="bliss-logo" className="bliss-logo" />
           <h3>Visit us </h3>
           <p>123 Fake Street Berlin, 10115 Germany</p>
           <div>

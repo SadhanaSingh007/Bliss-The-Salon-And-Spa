@@ -63,7 +63,7 @@
           width: 100%; // Initial width 0
           height: 5px; // Border height
 
-          background-color: black; // Border color
+          background-color: #2b201cfe; // Border color
           transition: width 0.5s ease; // Transition effect
         }
         &:hover::before {
@@ -80,6 +80,13 @@
       height: fit-content;
       margin-left: 5rem;
       background-color: #58403083;
+      .bliss-logo {
+        width: 200px;
+        height: 200px;
+        background-color: #2b201cfe;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+      }
 
       h1 {
         color: white;
@@ -125,11 +132,29 @@
 }
 
 .page1 {
-  background-image: url("../../assets/hero206.jpg");
+  background-image: url("../../assets/hero1.jpg");
+  background-position: top;
+  position: relative;
+}
+
+.logo-img {
+  position: absolute;
+  top: 5rem;
+  left: 1rem;
+  max-width: 400px;
+  margin: 0;
+
+  @media screen and (max-width: 768px) {
+    width: 18rem;
+  }
+  @media screen and (max-width: 576px) {
+    width: 12rem;
+  }
 }
 
 .page2 {
   background-image: url("../../assets/pedicure2.jpg");
+  position: relative;
 }
 
 .page3 {
@@ -141,6 +166,6 @@
 }
 
 .page5 {
-  background-image: url("../../assets/contct-home03.jpg");
+  background-image: url("../../assets/001.jpg");
   background-position: top;
 }

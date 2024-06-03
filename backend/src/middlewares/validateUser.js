@@ -1,5 +1,4 @@
 import { body, validationResult } from "express-validator";
-import { User } from "../models/User.js";
 
 const validateUser = [
   body("email").isEmail().withMessage("Must be a valid email").normalizeEmail(),

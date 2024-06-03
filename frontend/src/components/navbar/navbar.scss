@@ -26,12 +26,19 @@ body.menu-open::-webkit-scrollbar {
     list-style: none;
     padding-inline: 2rem;
     z-index: 10;
-
+    .flex-item {
+      width: 33%;
+    }
+    @media screen and (max-width: 576px) {
+      .logo {
+        display: block;
+        text-align: center;
+      }
+    }
     img {
       width: 80%;
       max-width: 10rem;
 
-      
       @media screen and (max-width: 768px) {
         width: 100%;
         max-width: 9rem;
@@ -51,10 +58,6 @@ body.menu-open::-webkit-scrollbar {
       display: flex;
       align-items: center;
     }
-    
-    ul{
-      margin-bottom: 0;
-  }
 
     .menu-icon {
       display: flex;
@@ -65,20 +68,18 @@ body.menu-open::-webkit-scrollbar {
 
       .cross-icon {
         transform: rotate(90deg);
-        // margin-left: -3rem;
       }
 
       @media screen and (max-width: 768px) {
         margin-right: auto;
         font-size: 1rem;
         gap: 5px;
-
       }
     }
 
     .cart-ul {
       padding: 0;
-      
+
       display: flex;
       margin: 0;
       align-items: center;
@@ -116,8 +117,8 @@ body.menu-open::-webkit-scrollbar {
           font-size: 1.1rem;
           width: 1.4rem;
           height: 1.4rem;
-         background-color: #333;
-         color: white;
+          background-color: #333;
+          color: white;
         }
       }
 
@@ -166,7 +167,6 @@ body.menu-open::-webkit-scrollbar {
             font-size: 0.8rem;
             min-width: 14px;
             height: 14px;
-      
           }
         }
       }
