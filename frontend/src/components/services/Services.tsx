@@ -70,7 +70,7 @@ const Services = () => {
                   <p className="service-description">{service.description}</p>
                   <p className="dash-p">-------------------------------</p>
                   <p className="service-duration">{service.duration}</p>
-                  <p className="service-price">${service.price}</p>
+                  <p className="service-price">€{service.price}</p>
                 </div>
               </div>
             ))}
