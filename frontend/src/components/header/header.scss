@@ -168,4 +168,7 @@
 .page5 {
   background-image: url("../../assets/001.jpg");
   background-position: top;
+  @media screen and (max-width: 576px) {
+    background-image: none;
+  }
 }

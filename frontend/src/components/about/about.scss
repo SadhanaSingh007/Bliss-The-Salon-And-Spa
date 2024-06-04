@@ -8,7 +8,9 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    animation: myBackgroundAnim 1.5s ease-in 0s 1 normal forwards;
+    // opacity: 0;
+    // animation: slideUpFromBottom 1s ease-out forwards;
+    // animation-delay: 0.5s;
     img {
       width: 750px;
       @media screen and (max-width: 768px) {
@@ -35,6 +37,9 @@
     color: white;
     display: flex;
     justify-content: left;
+    @media screen and (max-width: 768px) {
+      border: white 1rem solid;
+    }
 
     .inner-div-content {
       padding-block: 5rem;
@@ -45,12 +50,16 @@
         font-size: 1rem;
       }
       @media screen and (max-width: 768px) {
-        width: 95%;
+        width: 100%;
         font-size: 1rem;
       }
       h2 {
         font-size: 4rem;
         padding-left: 3rem;
+        @media screen and (max-width: 768px) {
+          font-size: 2.5rem;
+          padding-left: 2rem;
+        }
       }
 
       p {
@@ -58,6 +67,10 @@
         margin-top: 2rem;
         padding-left: 5rem;
         line-height: 2.5rem;
+        @media screen and (max-width: 576px) {
+          font-size: 1.2rem;
+          padding-inline: 2rem;
+        }
       }
     }
   }
@@ -107,10 +120,18 @@
         font-size: 3.2rem;
         font-style: italic;
         font-weight: 200;
+        @media screen and (max-width: 576px) {
+          font-size: 2.5rem;
+          letter-spacing: 0rem;
+          word-spacing: 0rem;
+        }
       }
       p,
       span {
         font-size: 1.5rem;
+        @media screen and (max-width: 576px) {
+          font-size: 1.2rem;
+        }
       }
 
       div {
@@ -125,13 +146,13 @@
   }
 }
 
-@keyframes myBackgroundAnim {
-  0% {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+// @keyframes slideUpFromBottom {
+//   from {
+//     transform: translateY(100%);
+//     opacity: 0;
+//   }
+//   to {
+//     transform: translateY(0);
+//     opacity: 1;
+//   }
+// }

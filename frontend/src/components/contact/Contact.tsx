@@ -73,7 +73,9 @@ const Contact = () => {
               field="message"
               errors={state.errors}
             />
-            <button type="submit">Submit</button>
+            <button type="submit">
+              <span>Submit</span>
+            </button>
           </form>
           {state.succeeded && (
             <div className="success-message">

@@ -57,11 +57,14 @@ const Navbar: React.FC = () => {
           {dropMenu ? (
             <li onClick={handleDropMenu} className="menu-icon">
               {!isMobile && <span>Menu</span>}
-              <TfiAlignLeft />
+              <TfiAlignLeft className="icon" />
             </li>
           ) : (
             <li className="menu-icon">
-              <AiOutlineClose onClick={handleDropMenu} className="cross-icon" />
+              <AiOutlineClose
+                onClick={handleDropMenu}
+                className="cross-icon icon"
+              />
             </li>
           )}
           <Menu handleDropMenu={handleDropMenu} dropMenu={dropMenu} />

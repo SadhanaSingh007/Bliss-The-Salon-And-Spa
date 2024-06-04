@@ -8,7 +8,7 @@ interface MenuProps {
 
 const Menu = ({ handleDropMenu, dropMenu }: MenuProps) => {
   return (
-    <div className={`menu ${dropMenu ? "hidden" : "active"}`}>
+    <div className={`menu ${dropMenu ? "not-active" : "Active"}`}>
       <ul>
         <Link to="/" className="link" onClick={handleDropMenu}>
           <li>Home </li>
