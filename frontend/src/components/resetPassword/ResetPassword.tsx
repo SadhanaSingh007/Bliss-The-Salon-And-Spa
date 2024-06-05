@@ -88,91 +88,93 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
           </p>
         </div>
       ) : (
-        <form
-          onSubmit={handlePasswordReset}
-          className="resetPassword-form"
-          action="submit"
-        >
-          <h2>Reset Password</h2>
-          {resetError && <p className="error-message">{resetError}</p>}
-          <div className="input-div">
-            {showPassword ? (
-              <input
-                ref={newPasswordInput}
-                className="resetPassword-input"
-                type="text"
-                placeholder="New Password"
-              />
-            ) : (
-              <input
-                ref={newPasswordInput}
-                className="resetPassword-input"
-                type="password"
-                placeholder="New Password"
-              />
-            )}
-            <span className="eye-icon" onClick={handleShowPassword}>
-              {showPassword ? <FaEye /> : <FaEyeSlash />}
-            </span>
-          </div>
+        <div>
+          <form
+            onSubmit={handlePasswordReset}
+            className="resetPassword-form"
+            action="submit"
+          >
+            <h2>Reset Password</h2>
+            {resetError && <p className="error-message">{resetError}</p>}
+            <div className="input-div">
+              {showPassword ? (
+                <input
+                  ref={newPasswordInput}
+                  className="resetPassword-input"
+                  type="text"
+                  placeholder="New Password"
+                />
+              ) : (
+                <input
+                  ref={newPasswordInput}
+                  className="resetPassword-input"
+                  type="password"
+                  placeholder="New Password"
+                />
+              )}
+              <span className="eye-icon" onClick={handleShowPassword}>
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </span>
+            </div>
 
-          <div className="input-div">
-            {showPassword ? (
-              <input
-                ref={confirmPasswordInput}
-                className="resetPassword-input"
-                type="text"
-                placeholder="Confirm New Password"
-              />
-            ) : (
-              <input
-                ref={confirmPasswordInput}
-                className="resetPassword-input"
-                type="password"
-                placeholder="Confirm New Password"
-              />
-            )}
-            <span className="eye-icon" onClick={handleShowPassword}>
-              {showPassword ? <FaEye /> : <FaEyeSlash />}
-            </span>
-          </div>
+            <div className="input-div">
+              {showPassword ? (
+                <input
+                  ref={confirmPasswordInput}
+                  className="resetPassword-input"
+                  type="text"
+                  placeholder="Confirm New Password"
+                />
+              ) : (
+                <input
+                  ref={confirmPasswordInput}
+                  className="resetPassword-input"
+                  type="password"
+                  placeholder="Confirm New Password"
+                />
+              )}
+              <span className="eye-icon" onClick={handleShowPassword}>
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </span>
+            </div>
 
-          <button type="submit">
-            <span>Reset Password</span>
-          </button>
+            <button type="submit">
+              <span>Reset Password</span>
+            </button>
 
-          <div style={{ marginLeft: "10px" }}>
-            <RotatingLines
-              strokeColor="grey"
-              strokeWidth="3"
-              animationDuration="0.75"
-              width="35"
-              visible={showSpinner}
-            />
+            <div style={{ marginLeft: "10px" }}>
+              <RotatingLines
+                strokeColor="grey"
+                strokeWidth="3"
+                animationDuration="0.75"
+                width="35"
+                visible={showSpinner}
+              />
+            </div>
+          </form>
+          <div className="password-validation-div">
+            <p className="heading">Secure password tips:</p>
+
+            <div>
+              <span>
+                <BsDot className="dot-icon" />
+              </span>
+
+              <p> Password must be at least 8 characters long.</p>
+            </div>
+
+            <div>
+              <span>
+                <BsDot className="dot-icon" />
+              </span>
+              <p>
+                Must contain at least one number, one special character, and one
+                uppercase letter.
+              </p>
+            </div>
           </div>
-        </form>
+        </div>
       )}
-      <div className="password-validation-div">
-        <p className="heading">Secure password tips:</p>
-
-        <div>
-          <span>
-            <BsDot className="dot-icon" />
-          </span>
-
-          <p> Password must be at least 8 characters long.</p>
-        </div>
-
-        <div>
-          <span>
-            <BsDot className="dot-icon" />
-          </span>
-          <p>
-            Must contain at least one number, one special character, and one
-            uppercase letter.
-          </p>
-        </div>
-      </div>
     </div>
   );
 };
