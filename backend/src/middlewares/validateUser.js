@@ -1,7 +1,7 @@
 import { body, validationResult } from "express-validator";
 
 const validateUser = [
-  body("email").isEmail().withMessage("Must be a valid email").normalizeEmail(),
+  body("email").isEmail().withMessage("Must be a valid email"),
   body("password")
     .isLength({ min: 8 })
     .withMessage("password must be  at leasst 8 character long")
