@@ -3,7 +3,7 @@ import "./contact.scss";
 import { useEffect, useRef } from "react";
 
 const Contact = () => {
-  const [state, handleSubmit] = useForm("myyrorpk");
+  const [state, handleSubmit] = useForm("mleqyznd");
   const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
     if (state.succeeded && formRef.current) {
